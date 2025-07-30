@@ -1,26 +1,28 @@
 package com.spring.project.controller;
 
 import com.spring.project.JournalEntity;
+import com.spring.project.service.JournalEntryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/journal")
 public class JournalEntryController {
 
-    private Map<Long, JournalEntity> journalEntityMap = new HashMap<Long,JournalEntity>();
+    @Autowired
+    private JournalEntryService journalEntryService;
 
     @GetMapping("/all")
     public List<JournalEntity> getAll() {
-        return new ArrayList<>(journalEntityMap.values());
+        return journalEntryService.getAllEntries();
     }
 
     @PostMapping
     public void createJournal(@RequestBody JournalEntity journalEntity) {
-        journalEntityMap.put(journalEntity.getId(), journalEntity);
+        journalEntity.setDate(LocalDateTime.now());
+        journalEntryService.saveEntry(journalEntity);
     }
 }
