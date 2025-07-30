@@ -1,19 +1,23 @@
 package com.spring.project.service;
 
-import com.spring.project.JournalEntity;
+import com.spring.project.entity.JournalEntity;
 import com.spring.project.repository.JournalEntryRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Service
 public class JournalEntryService {
 
+    private final JournalEntryRepository journalEntryRepository;
+
     @Autowired
-    private JournalEntryRepository journalEntryRepository;
+    public JournalEntryService(JournalEntryRepository journalEntryRepository) {
+        this.journalEntryRepository = journalEntryRepository;
+    }
 
     public void saveEntry(JournalEntity journalEntity) {
         journalEntryRepository.save(journalEntity);

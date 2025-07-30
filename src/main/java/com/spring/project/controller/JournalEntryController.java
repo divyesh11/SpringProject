@@ -1,6 +1,6 @@
 package com.spring.project.controller;
 
-import com.spring.project.JournalEntity;
+import com.spring.project.entity.JournalEntity;
 import com.spring.project.service.JournalEntryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,8 +15,12 @@ import java.util.Optional;
 @RequestMapping("/journal")
 public class JournalEntryController {
 
+    private final JournalEntryService journalEntryService;
+
     @Autowired
-    private JournalEntryService journalEntryService;
+    public JournalEntryController(JournalEntryService journalEntryService) {
+        this.journalEntryService = journalEntryService;
+    }
 
     @GetMapping
     public List<JournalEntity> getAll() {
