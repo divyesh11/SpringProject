@@ -1,7 +1,7 @@
 package com.spring.project.service;
 
-import com.spring.project.Notification;
 import com.spring.project.entity.User;
+import com.spring.project.notification.interfaces.Notification;
 import com.spring.project.repository.UserRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;

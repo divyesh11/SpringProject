@@ -1,7 +1,7 @@
 package com.spring.project.controller;
 
-import com.spring.project.EmailNotification;
 import com.spring.project.entity.User;
+import com.spring.project.notification.EmailNotification;
 import com.spring.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

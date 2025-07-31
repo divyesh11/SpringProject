@@ -1,4 +1,6 @@
-package com.spring.project;
+package com.spring.project.notification;
+
+import com.spring.project.notification.interfaces.Notification;
 
 public class SMSNotification implements Notification {
     @Override
