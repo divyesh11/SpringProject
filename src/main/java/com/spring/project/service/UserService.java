@@ -1,5 +1,6 @@
 package com.spring.project.service;
 
+import com.spring.project.Notification;
 import com.spring.project.entity.User;
 import com.spring.project.repository.UserRepository;
 import org.bson.types.ObjectId;
@@ -29,5 +30,9 @@ public class UserService {
 
     public Optional<User> getUserByUserId(String id) {
         return userRepository.findById(new ObjectId(id));
+    }
+
+    public void sendNotification(Notification notification) {
+        notification.notifyMe();
     }
 }

@@ -1,5 +1,6 @@
 package com.spring.project.controller;
 
+import com.spring.project.EmailNotification;
 import com.spring.project.entity.User;
 import com.spring.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ public class UserController {
         if (users == null || users.isEmpty()) {
             return new ResponseEntity<List<User>>(HttpStatus.NO_CONTENT);
         }
+        userService.sendNotification(new EmailNotification("My Email"));
         return new ResponseEntity<List<User>>(users, HttpStatus.OK);
     }
 
