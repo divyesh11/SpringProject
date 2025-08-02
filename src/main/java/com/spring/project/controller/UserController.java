@@ -28,7 +28,7 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getUserById(@RequestParam Map<String, ?> queryParams) {
+    public ResponseEntity<?> getUserById(@RequestHeader Map<String, ?> queryParams) {
         User user = null;
         if (queryParams.get("username") != null) {
             user = userService.getUserByUsername(queryParams.get("username").toString());
@@ -41,7 +41,7 @@ public class UserController {
             return new ResponseEntity<String>("Username or UserId should be passed as query params", HttpStatus.BAD_REQUEST);
         }
         if (user == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("User not found!", HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
