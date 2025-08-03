@@ -1,8 +1,8 @@
 package com.spring.project.entity;
 
-import lombok.Getter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.Setter;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -10,8 +10,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 
 @Document(collection = "journal_entries")
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
 public class JournalEntity {
     @Id
     private ObjectId id;
@@ -19,4 +19,8 @@ public class JournalEntity {
     private String title;
     private String content;
     private LocalDateTime date;
+
+    public String getId() {
+        return id.toHexString();
+    }
 }

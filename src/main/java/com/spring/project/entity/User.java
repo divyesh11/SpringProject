@@ -1,6 +1,7 @@
 package com.spring.project.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Data
 @Document(collection = "journal_users")
+@NoArgsConstructor
 public class User {
     @Id
     private ObjectId id;
