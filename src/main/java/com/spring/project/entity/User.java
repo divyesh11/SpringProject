@@ -25,6 +25,7 @@ public class User {
     private String password;
     @DBRef
     private List<JournalEntity> journals = new ArrayList<>();
+    private List<String> roles;
 
     public String getId() {
         return id.toHexString();
