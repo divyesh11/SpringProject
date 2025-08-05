@@ -33,8 +33,7 @@ public class JournalEntryService {
         JournalEntity savedEntry = journalEntryRepository.save(journalEntity);
         log.debug("Saved Entry : + {}", savedEntry.getId());
         user.getJournals().add(savedEntry);
-        user.setUsername(null);
-        userService.saveUser(user);
+        userService.updateUser(user);
     }
 
     public List<JournalEntity> getAllEntries() {
@@ -50,7 +49,7 @@ public class JournalEntryService {
         ObjectId journalId = new ObjectId(id);
         User user = userService.getUserByUsername(username);
         user.getJournals().removeIf(entry -> entry.getId().equals(journalId));
-        userService.saveUser(user);
+        userService.updateUser(user);
         journalEntryRepository.deleteById(journalId);
         return Boolean.TRUE;
     }
