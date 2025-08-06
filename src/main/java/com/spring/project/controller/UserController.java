@@ -9,7 +9,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -18,16 +17,6 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     private UserService userService;
-
-    @GetMapping("/all")
-    public ResponseEntity<List<User>> getAllUsers() {
-        List<User> users = userService.getAllUsers();
-        if (users == null || users.isEmpty()) {
-            return new ResponseEntity<List<User>>(HttpStatus.NO_CONTENT);
-        }
-//        userService.sendNotification(new EmailNotification("My Email"));
-        return new ResponseEntity<List<User>>(users, HttpStatus.OK);
-    }
 
     @GetMapping
     public ResponseEntity<?> getUserById(@RequestHeader Map<String, ?> queryParams) {

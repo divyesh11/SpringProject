@@ -86,7 +86,7 @@ public class JournalEntryController {
         JournalEntity journalEntity = oldEntry.get();
         journalEntity.setTitle(newJournalEntity.getTitle() == null ? journalEntity.getTitle() : newJournalEntity.getTitle());
         journalEntity.setContent(newJournalEntity.getContent() == null ? journalEntity.getContent() : newJournalEntity.getContent());
-        journalEntryService.saveEntry(journalEntity, username);
+        journalEntryService.updateEntry(journalEntity, username);
         return new ResponseEntity<>(journalEntity, HttpStatus.OK);
     }
 

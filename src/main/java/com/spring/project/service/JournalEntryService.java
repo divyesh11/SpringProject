@@ -36,6 +36,14 @@ public class JournalEntryService {
         userService.updateUser(user);
     }
 
+    @Transactional
+    public void updateEntry(JournalEntity journalEntity, String username) {
+        User user = userService.getUserByUsername(username);
+        journalEntity.setDate(LocalDateTime.now());
+        JournalEntity savedEntry = journalEntryRepository.save(journalEntity);
+        log.debug("Saved Entry : + {}", savedEntry.getId());
+    }
+
     public List<JournalEntity> getAllEntries() {
         return journalEntryRepository.findAll();
     }
