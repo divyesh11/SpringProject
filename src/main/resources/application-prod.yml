@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: project
+  data:
+    mongodb:
+      uri: ${MONGO_DB_URI}
+      auto-index-creation: true
+
+server:
+  port: 8082
+
+logging:
+  level.com.spring.project: debug

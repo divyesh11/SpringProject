@@ -3,6 +3,7 @@ package com.spring.project.service;
 import com.spring.project.entity.User;
 import com.spring.project.notification.interfaces.Notification;
 import com.spring.project.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class UserService {
 
     @Autowired
@@ -29,6 +31,7 @@ public class UserService {
             userRepository.save(user);
             return true;
         } catch (Exception e) {
+            log.debug("Error creating user : ", e);
             return false;
         }
     }
