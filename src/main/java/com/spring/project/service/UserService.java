@@ -20,10 +20,17 @@ public class UserService {
 
     private final static PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public void saveNewUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRoles(List.of("USER"));
-        userRepository.save(user);
+    public boolean saveNewUser(User user) {
+        try {
+            if (user.getUsername().isBlank()) return false;
+            if (user.getPassword().isBlank()) return false;
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setRoles(List.of("USER"));
+            userRepository.save(user);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public void saveNewAdminUser(User user) {
