@@ -1,7 +1,9 @@
 package com.spring.project.controller;
 
+import com.spring.project.api.response.WeatherResponse;
 import com.spring.project.entity.User;
 import com.spring.project.service.UserService;
+import com.spring.project.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +17,14 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+    private final UserService userService;
+    private final WeatherService weatherService;
+
     @Autowired
-    private UserService userService;
+    UserController(UserService userService, WeatherService weatherService) {
+        this.userService = userService;
+        this.weatherService = weatherService;
+    }
 
     @GetMapping
     public ResponseEntity<?> getUserById(@RequestHeader Map<String, ?> queryParams) {
@@ -45,5 +53,17 @@ public class UserController {
         oldUser.setPassword(updatedUserDetails.getPassword());
         userService.saveNewUser(oldUser);
         return new ResponseEntity<>(oldUser, HttpStatus.OK);
+    }
+
+    @GetMapping("/greetings")
+    public ResponseEntity<?> greetings() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        WeatherResponse weatherResponse = weatherService.getWeather("Mumbai");
+        String weatherDescription = "";
+        if (weatherResponse != null) {
+            weatherDescription = "Weather feels like : " + weatherResponse.getCurrent().getFeelslike();
+        }
+        return new ResponseEntity<>("Hello, " + username + " " + weatherDescription, HttpStatus.OK);
     }
 }

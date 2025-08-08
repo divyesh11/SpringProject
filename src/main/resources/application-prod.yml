@@ -11,3 +11,8 @@ server:
 
 logging:
   level.com.spring.project: debug
+
+api:
+  keys:
+    weather: ${WEATHER_API_KEY}
+    quotes: ${QUOTES_API_KEY}
