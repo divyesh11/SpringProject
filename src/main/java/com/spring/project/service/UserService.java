@@ -17,10 +17,13 @@ import java.util.Optional;
 @Slf4j
 public class UserService {
 
-    @Autowired
-    public UserRepository userRepository;
+    private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private final UserRepository userRepository;
 
-    private final static PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    @Autowired
+    UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public boolean saveNewUser(User user) {
         try {

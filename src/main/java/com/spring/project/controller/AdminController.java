@@ -20,17 +20,17 @@ public class AdminController {
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.getAllUsers();
         if (users == null || users.isEmpty()) {
-            return new ResponseEntity<List<User>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<User>>(users, HttpStatus.OK);
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     @PostMapping("/create-admin-user")
     public ResponseEntity<?> createUser(@RequestBody User user) {
         if (user.getUsername().isBlank()) {
-            return new ResponseEntity<String>("Username cannot be empty!", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Username cannot be empty!", HttpStatus.BAD_REQUEST);
         }
         userService.saveNewAdminUser(user);
-        return new ResponseEntity<User>(user, HttpStatus.CREATED);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 }

@@ -37,13 +37,12 @@ public class JournalEntryService {
             userService.updateUser(user);
         } catch (Exception e) {
             log.error("Error saving entry" + journalEntity.getTitle() + e.getMessage());
-            throw new RuntimeException("Error saving entry" + journalEntity.getTitle());
+            throw new IllegalStateException("Error saving entry" + journalEntity.getTitle());
         }
     }
 
     @Transactional
     public void updateEntry(JournalEntity journalEntity, String username) {
-        User user = userService.getUserByUsername(username);
         journalEntity.setDate(LocalDateTime.now());
         JournalEntity savedEntry = journalEntryRepository.save(journalEntity);
         log.debug("Saved Entry : + {}", savedEntry.getId());
@@ -61,7 +60,7 @@ public class JournalEntryService {
     public Boolean deleteById(String id, String username) {
         ObjectId journalId = new ObjectId(id);
         User user = userService.getUserByUsername(username);
-        user.getJournals().removeIf(entry -> entry.getId().equals(journalId));
+        user.getJournals().removeIf(entry -> entry.getId().equals(id));
         userService.updateUser(user);
         journalEntryRepository.deleteById(journalId);
         return Boolean.TRUE;
