@@ -37,12 +37,12 @@ public class UserController {
                 user = userData.get();
             }
         } else {
-            return new ResponseEntity<String>("Username or UserId should be passed as query params", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Username or UserId should be passed as query params", HttpStatus.BAD_REQUEST);
         }
         if (user == null) {
             return new ResponseEntity<>("User not found!", HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<User>(user, HttpStatus.OK);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @PutMapping
