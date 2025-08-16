@@ -1,5 +1,6 @@
 package com.spring.project.controller;
 
+import com.spring.project.cache.AppCache;
 import com.spring.project.entity.User;
 import com.spring.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class AdminController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private AppCache appCache;
 
     @GetMapping("/all-users")
     public ResponseEntity<List<User>> getAllUsers() {
@@ -32,5 +36,11 @@ public class AdminController {
         }
         userService.saveNewAdminUser(user);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/update-config")
+    public ResponseEntity<String> updateConfig() {
+        appCache.init();
+        return new ResponseEntity<>("Configuration updated successfully!", HttpStatus.OK);
     }
 }
