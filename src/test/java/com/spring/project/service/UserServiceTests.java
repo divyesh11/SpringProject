@@ -14,9 +14,7 @@ import org.springframework.test.context.TestPropertySource;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@TestPropertySource(properties = {
-        "spring.data.mongodb.uri=${MONGO_DB_URI}"
-})
+@TestPropertySource(locations = "classpath:application-prod.yml")
 public class UserServiceTests {
 
     @Autowired
