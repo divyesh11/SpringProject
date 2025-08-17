@@ -21,7 +21,6 @@ public class User {
     @Indexed(unique = true)
     @NonNull
     private String username;
-    @Indexed(unique = true)
     private String email;
     private boolean sentimentAnalysis;
     @NonNull

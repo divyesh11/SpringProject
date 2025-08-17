@@ -5,6 +5,18 @@ spring:
     mongodb:
       uri: ${MONGO_DB_URI}
       auto-index-creation: true
+  mail:
+    port: 587
+    username: divyeshjivani10@gmail.com
+    password: ${EMAIL_PASSWORD}
+    host: smtp.gmail.com
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
 server:
   port: 8082
 
