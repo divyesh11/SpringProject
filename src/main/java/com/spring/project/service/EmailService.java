@@ -13,7 +13,7 @@ public class EmailService {
     @Autowired
     private JavaMailSender javaMailSender;
 
-    public void sendEmail(String to, String subject, String body) {
+    public void sendEmail(String to, String subject, String body, String... cc) {
         try {
             log.info("Sending email to: {}", to);
             log.info("Subject: {}", subject);
@@ -23,6 +23,7 @@ public class EmailService {
             email.setSubject(subject);
             email.setTo(to);
             email.setText(body);
+            email.setCc(cc);
             javaMailSender.send(email);
         } catch (Exception e) {
             log.error("Error sending email to {}", to, e);
