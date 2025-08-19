@@ -25,8 +25,10 @@ public class AppCache {
     @PostConstruct
     public void init() {
         this.cache = new HashMap<>();
+        Map<String, String> tempCache = new HashMap<>();
         List<ConfigJournalApp> entries = configJournalAppRepository.findAll();
-        entries.forEach(entry -> this.cache.put(entry.getKey(), entry.getValue()));
+        entries.forEach(entry -> tempCache.put(entry.getKey(), entry.getValue()));
+        this.cache = tempCache;
         log.info("AppCache initialized with {} entries", cache.size());
     }
 
