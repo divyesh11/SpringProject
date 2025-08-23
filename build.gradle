@@ -56,6 +56,8 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
     implementation 'org.jetbrains.kotlin:kotlin-reflect'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+    implementation 'software.amazon.awssdk:dynamodb:2.20.26'
+    implementation 'software.amazon.awssdk:dynamodb-enhanced:2.20.26'
 }
 
 sonarqube {
