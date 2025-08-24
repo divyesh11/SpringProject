@@ -18,7 +18,30 @@ spring:
           auth: true
           starttls:
             enable: true
-
+  kafka:
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: weekly-sentiment-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: com.spring.project.kafkamodels
+    properties:
+      security:
+        protocol: SASL_SSL
+      sasl:
+        mechanism: PLAIN
+        jaas:
+          config: org.apache.kafka.common.security.plain.PlainLoginModule required username='${KAFKA_USERNAME}' password='${KAFKA_PASSWORD}';
+      session:
+        timeout:
+          ms: 45000
+    bootstrap-servers: pkc-l7pr2.ap-south-1.aws.confluent.cloud:9092
 server:
   port: 8082
 
@@ -29,3 +52,8 @@ api:
   keys:
     weather: ${WEATHER_API_KEY}
     quotes: ${QUOTES_API_KEY}
+
+#client:
+#  id: ccloud-springboot-client-b418b2b8-d620-484d-bfb6-3506f9b2b9a4
+
+#  org.apache.kafka.common.security.plain.PlainLoginModule required username='XGYCIJJEAIWQRPZE' password='cfltdjBWP2RXRKtbMokqdOP8jcWErLDNfFucJl4vw4DE+g+I2QF79WpF2Hcj+5Hg';

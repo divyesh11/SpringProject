@@ -58,6 +58,8 @@ dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
     implementation 'software.amazon.awssdk:dynamodb:2.20.26'
     implementation 'software.amazon.awssdk:dynamodb-enhanced:2.20.26'
+    implementation 'org.apache.kafka:kafka-clients'
+    implementation 'org.springframework.kafka:spring-kafka'
 }
 
 sonarqube {
