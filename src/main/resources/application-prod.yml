@@ -52,8 +52,3 @@ api:
   keys:
     weather: ${WEATHER_API_KEY}
     quotes: ${QUOTES_API_KEY}
-
-#client:
-#  id: ccloud-springboot-client-b418b2b8-d620-484d-bfb6-3506f9b2b9a4
-
-#  org.apache.kafka.common.security.plain.PlainLoginModule required username='XGYCIJJEAIWQRPZE' password='cfltdjBWP2RXRKtbMokqdOP8jcWErLDNfFucJl4vw4DE+g+I2QF79WpF2Hcj+5Hg';
