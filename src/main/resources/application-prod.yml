@@ -52,3 +52,6 @@ api:
   keys:
     weather: ${WEATHER_API_KEY}
     quotes: ${QUOTES_API_KEY}
+
+jwt:
+  secret-key: ${SECRET_KEY}
