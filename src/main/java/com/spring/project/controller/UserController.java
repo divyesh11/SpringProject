@@ -4,6 +4,7 @@ import com.spring.project.api.response.WeatherResponse;
 import com.spring.project.entity.User;
 import com.spring.project.service.UserService;
 import com.spring.project.service.WeatherService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
+@Tag(name = "User APIs", description = "used for all the user related transactions.")
 public class UserController {
     private final UserService userService;
     private final WeatherService weatherService;
@@ -51,7 +53,7 @@ public class UserController {
         User oldUser = userService.getUserByUsername(authentication.getName());
         oldUser.setUsername(updatedUserDetails.getUsername());
         oldUser.setPassword(updatedUserDetails.getPassword());
-        userService.saveNewUser(oldUser);
+        userService.updateUser(oldUser);
         return new ResponseEntity<>(oldUser, HttpStatus.OK);
     }
 

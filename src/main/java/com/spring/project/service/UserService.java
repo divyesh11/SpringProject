@@ -1,5 +1,7 @@
 package com.spring.project.service;
 
+import com.spring.project.dto.NetworkResponse;
+import com.spring.project.dto.NetworkResponseType;
 import com.spring.project.entity.User;
 import com.spring.project.notification.interfaces.Notification;
 import com.spring.project.repository.UserRepository;
@@ -25,17 +27,22 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public boolean saveNewUser(User user) {
+    public NetworkResponse saveNewUser(User user) {
         try {
-            if (user.getUsername().isBlank()) return false;
-            if (user.getPassword().isBlank()) return false;
+            if (user.getUsername().isBlank())
+                return new NetworkResponse(NetworkResponseType.FAILURE, "Username is blank");
+            if (user.getPassword().isBlank())
+                return new NetworkResponse(NetworkResponseType.FAILURE, "Password is blank");
+            if (userRepository.findByUsername(user.getUsername()) != null) {
+                return new NetworkResponse(NetworkResponseType.FAILURE, "User already exits");
+            }
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setRoles(List.of("USER"));
             userRepository.save(user);
-            return true;
+            return new NetworkResponse(NetworkResponseType.SUCCESS, "");
         } catch (Exception e) {
             log.debug("Error creating user : ", e);
-            return false;
+            return new NetworkResponse(NetworkResponseType.FAILURE, e.getMessage());
         }
     }
 
